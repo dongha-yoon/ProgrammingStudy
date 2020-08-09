@@ -1,11 +1,7 @@
 /*
-You should use the standard input/output
-
-in order to receive a score properly.
-
-Do not use file input and output
-
-Please be very careful. 
+https://www.codeground.org/practice/
+74	SCPC 2018 Online	
+Bus Allocation
 */
 
 #include <iostream>

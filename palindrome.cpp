@@ -1,3 +1,10 @@
+/*
+https://www.codeground.org/practice/
+75	SCPC 2018 Online	
+Sum of Palindrome numbers
+*/
+
+
 #include <iostream>
 #include <vector>
 

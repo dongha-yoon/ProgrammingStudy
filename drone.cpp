@@ -1,3 +1,9 @@
+/*
+https://www.codeground.org/practice/
+100	SCPC 2019 Online	
+Drone exploration
+*/
+
 #include <iostream>
 #include <vector>
 
@@ -61,14 +67,14 @@ void Cave::setNode(){
         }
         else if( (c_x + (*c).w) > (f_x + (*f).w)){
             f_x += (*f).w;
-            chk_point.push_back(Node(f_x, min((*f).h,*(f+1).h)) );
+            chk_point.push_back(Node(f_x, max((*f).h,*(f+1).h)) );
             f++;
         }
         else{ //if equal
             c_x += (*c).w;
             f_x += (*f).w;
             chk_point.push_back(Node(c_x, min((*c).h,*(c+1).h)) );
-            chk_point.push_back(Node(f_x, min((*f).h,*(f+1).h)) );
+            chk_point.push_back(Node(f_x, max((*f).h,*(f+1).h)) );
             c++;
             f++;
         }
