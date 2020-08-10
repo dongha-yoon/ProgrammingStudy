@@ -1,13 +1,15 @@
 /*
-https://programmers.co.kr/learn/courses/30/lessons/42860
+problem : https://programmers.co.kr/learn/courses/30/lessons/42860
+review : https://ssyoon.tistory.com/11
 */
 #include <string>
 #include <vector>
 #include <iostream>
 
+#define MOVE_MAX 1000000
+
 using namespace std;
 
-//A-Z : ASCII 65-90
 int continueA(string name, int &idx){
     int cnt = 0;
     int result = 0;
@@ -24,16 +26,17 @@ int continueA(string name, int &idx){
 }
 
 int moveX(string name){
-    int move = 0;
-    int move_r = 0;
-    int move_z = 0;
+    int move = MOVE_MAX;
+    int move_r = MOVE_MAX;
+    int move_z = MOVE_MAX;
 
     int contAidx;
     int contA = continueA(name, contAidx);
-    int z_part1 = contAidx - contA;
-    int z_part2 = name.size()-(contAidx+1);
-
-    move_z = z_part1 + z_part2 + min(z_part1,z_part2);
+    if(contAidx != -1){
+        int z_part1 = contAidx - contA;
+        int z_part2 = name.size()-(contAidx+1);
+        move_z = z_part1 + z_part2 + min(z_part1,z_part2);
+    }
 
     for(int i=1;i<name.size();i++){
         move_r = name.size() - i;
@@ -47,7 +50,7 @@ int moveX(string name){
     }
 
     // return smallest movement.
-    int min = 10000000;
+    int min = MOVE_MAX;
     if(move < min)  min = move;
     if(move_r < min)  min = move_r;
     if(move_z < min)  min = move_z;
