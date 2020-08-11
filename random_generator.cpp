@@ -13,5 +13,5 @@ int main(){
     cin >> num;
 
     srand(seed);
-    for(int i=0; i<num; i++) cout << rand()%1000000001 << " ";
+    for(int i=0; i<num; i++) cout << (rand()%100 +1) << " ";
 }

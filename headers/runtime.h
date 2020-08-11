@@ -1,5 +1,9 @@
 #include <time.h>
 #include <stdio.h>
+#include <iostream>
+
+using namespace std;
+
 
 class RuntimeClock{
     private:
@@ -10,12 +14,15 @@ class RuntimeClock{
 
         void init(){
             start = time(NULL);
-            std::cout << "Clock initiated." << " time - " << (double)start << std::endl;
+            cout << "Clock initiated." << " time - " << (double)start << endl;
         }
 
         double get_time(){
             end = time(NULL);
             return (double)(end-start);
+        }
+        void calculate(){
+            cout << "Total Runtime is " << get_time() << endl;
         }
 };
 
