@@ -1,7 +1,11 @@
 /*
+# problem
 https://www.codeground.org/practice/
 1	Practice	
 Picking Out Numbers
+
+# review
+https://ssyoon.tistory.com/12?category=922628
 */
 #include <iostream>
 #include <map>

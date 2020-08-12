@@ -1,7 +1,10 @@
 /*
+# problem
 https://www.codeground.org/practice/
 100	SCPC 2019 Online	
 Drone exploration
+
+#review
 */
 
 #include <iostream>
@@ -19,9 +22,6 @@ struct Node{
 inline int getDistance(Node n1, Node n2){
     return abs(n1.x-n2.x)+abs(n1.y-n2.y);
 }
-
-
-
 
 struct T_B{
     int w,h;

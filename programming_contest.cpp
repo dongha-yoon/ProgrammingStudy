@@ -1,7 +1,11 @@
 /*
+# problem
 https://www.codeground.org/practice/
 2	Practice	
 Programming Contest
+
+# review
+https://ssyoon.tistory.com/14?category=922628
 */
 
 #include <iostream>
