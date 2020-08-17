@@ -41,6 +41,7 @@ class Cave{
         void setCel(int N);
         void setFlo(int N);
         void setNode();
+        void getRoute();
         
 };
 
@@ -95,6 +96,17 @@ void Cave::setNode(){
     }
     chk_point.push_back(vector<Node>(1,end));
 
+    //Check Nodes are correct
+    // for(int i=0;i<chk_point.size();i++){
+    //     cout << "chk_point : ";
+    //     for(int j=0;j<chk_point[i].size();j++){
+    //         cout << chk_point[i][j].x << " " << chk_point[i][j].y << "  ";
+    //     }
+    //     cout << endl;
+    // }    
+}
+
+void Cave::getRoute(){
     vector<vector<pair<int,int>>> route;
     route.push_back(vector<pair<int,int>>(1,make_pair(0,0)));
     
@@ -121,11 +133,14 @@ void Cave::setNode(){
         }
         route.push_back(tmp);
 
-        cout << chk_point[i][tmp[0].second].x << "," << chk_point[i][tmp[0].second].y << endl;
+        // cout << chk_point[i][tmp[0].second].x << "," << chk_point[i][tmp[0].second].y << endl;
     }
-
-    
 }
+
+ 
+
+
+
 
 
 
@@ -147,7 +162,8 @@ int main(int argc, char** argv)
         cin >> B;
         c.setFlo(B);         
         c.setNode();
-		
+		c.getRoute();
+
         Answer = 0;
 		
 		cout << "Case #" << test_case+1 << endl;
