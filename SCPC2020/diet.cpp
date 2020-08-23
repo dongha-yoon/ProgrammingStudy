@@ -1,13 +1,3 @@
-/*
-You should use the standard input/output
-
-in order to receive a score properly.
-
-Do not use file input and output
-
-Please be very careful. 
-*/
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -46,8 +36,6 @@ int main(int argc, char** argv)
         // for(int i=0;i<N;i++){
         //     cout << i << ":\t" << lunch[i] <<"  |  " << dinner[i] << endl;
         // }
-
-
         if(K < N){
             lunch.resize(K);
             dinner.resize(K);

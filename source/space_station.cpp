@@ -5,7 +5,7 @@ https://www.codeground.org/practice/
 Space Station
 
 #review
-https://ssyoon.tistory.com/18
+
 */
 #include <iostream>
 #include <vector>
