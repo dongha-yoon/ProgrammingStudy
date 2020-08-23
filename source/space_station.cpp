@@ -21,7 +21,7 @@ class Module{
         void setNode();    
         void addNode(int a,int b);
         int split();
-        bool isConnected(const int& n1,const int& n2);
+        inline bool isConnected(const int& n1,const int& n2);
 
 };
 
@@ -72,7 +72,7 @@ int Module::split(){
     return Node.size();
 }
 
-bool Module::isConnected(const int& n1,const int& n2){
+inline bool Module::isConnected(const int& n1,const int& n2){
     if(Node.find(n1)==Node.end()
        || Node.find(n2)==Node.end()) return false;
     else{
