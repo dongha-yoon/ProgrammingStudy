@@ -28,7 +28,7 @@ int main(){
     int N;
     cin >> N;
     for(int i=0;i<N;i++){
-            if(sugar[i]==-1)
+            if(sugar[i]==MAX)
                 continue;
             else{
                 sugar[i+3] = min(sugar[i+3],sugar[i] + 1);
