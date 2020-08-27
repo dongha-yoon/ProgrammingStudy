@@ -1,5 +1,6 @@
 /*
 #problem
+https://www.acmicpc.net/problem/2579
 
 #review
 
@@ -10,38 +11,93 @@
 
 using namespace std;
 
+#define MAX 305
 
-int stair[301];
+int stair[MAX];
+bool isVisited[MAX];
+int sum[MAX];
 
-int max_idx(int a,int b){
-    int Va = stair[a];
-    int Vb = stair[b];
 
-    if(Va < Vb)
-        return b;
-    else
-        return a;
-
+void init(){
+    for(int i=0;i<301;i++){
+        stair[i] = -1;
+        isVisited[i] = false;
+        sum[i] = 0;
+    }
+    for(int i=1;i<=2;i++){
+        sum[i] += stair[i];
+        isVisited[i]=true;
+    }
 }
 
+inline int getMax(int a,int b){
+    return ( a>=b )? a:b;
+}
+
+
+int solve(int N, int& s=0){
+    /*
+        isVisited[N],[N-1],[N-2]
+        state==0 : T T F
+        state==1 : T F T
+        state==2 : F T T
+    */
+
+
+    // cout << "N: " << N  << " - " << stair[N] << endl;
+
+    // cout << "V: ";
+    // for(int i=0;i<3;i++){
+    //     cout << isVisited[N+i] << " ";
+    // }
+    // cout << endl << endl;
+
+    if( N<0 || stair[N]==-1 ) return 0;
+    if( sum[N] !=0 ) return sum[N];
+    
+    int state1, state2=0;
+    int sub1 = solve(N-1,state1);
+    int sub2 = solve(N-2,state2);
+
+
+
+    if( sub1+(state1==0)? 0:stair[N] > sub2+stair[N]  )    
+
+
+    return sum[N];
+}
+
+
+
 int main(){
-    stair[0]=0;
+    
 
     int N;
     cin >> N;
     
-    for(int i=1;i<=N;i++)
+    int max=0;
+    for(int i=1;i<=N;i++){
         scanf("%d",&stair[i]);
-    
-    int last_idx = max_idx(N-1,N-2);
-    int sum=stair[N] + stair[last_idx];
-    while(last_idx > 0){
-        last_idx = max_idx(last_idx-1,last_idx-2);
-        sum += stair[last_idx];
+        // max += stair[i];
+        // isVisited[i] = true;
+        // if( i>2 && isVisited[i-1]==true && isVisited[i-2]==true){
+        //     int pop_idx = getPopIdx(i-1,i-2);
+        //     max -= stair[pop_idx];
+        //     isVisited[pop_idx]=false;
+        // }
     }
-
-
+    init();
     
-    cout << sum << endl;
+    int state;
+    solve(N-1, state);
+
+
+    cout << max << endl;
+
+    for(int i=1;i<=N;i++){
+            cout << isVisited[i] << " ";
+    }
+        
+  
     // show();
 }
