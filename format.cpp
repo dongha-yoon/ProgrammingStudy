@@ -10,6 +10,12 @@
 
 using namespace std;
 
-int main(){
+
+void init(){
     
+}
+
+
+int main(){
+    init();
 }
