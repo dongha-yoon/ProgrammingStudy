@@ -9,7 +9,7 @@ https://www.codeground.org/common/popCodegroundNote - only members are accessibl
 */
 #include <iostream>
 
-#define MAX 10000
+#define MAX 100'000'000
 
 using namespace std;
 
