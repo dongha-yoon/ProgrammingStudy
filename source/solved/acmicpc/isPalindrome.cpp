@@ -14,7 +14,6 @@ https://ssyoon.tistory.com/19
 
 using namespace std;
 
-
 int dp[2001][2001];
 int arr[2001];
 
@@ -32,6 +31,7 @@ int main(){
             }
         }
     }
+
     int M;
     cin >> M;
     for(int i=0;i<M;i++){

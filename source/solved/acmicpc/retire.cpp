@@ -24,10 +24,13 @@ int solve(int N=0){
     if(cost[N+cost[N]]==0 ) return dp[N]=solve(N+1);
     
     if(cost[N]==1) return dp[N]=pay[N]+solve(N+1);
+    
     int maxv=pay[N]+solve(N+cost[N]);
+    
     for(int i=1;i<cost[N];i++){
         maxv = max(maxv, solve(N+i));
     }
+
     return dp[N] = maxv;
 }
 
