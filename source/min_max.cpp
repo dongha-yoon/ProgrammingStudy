@@ -49,8 +49,10 @@ int main(){
             L = L/2;
             R = R/2;
             for(int j=L;j<=R;j++){
-                seg_tree[j].min = min(seg_tree[j*2].min,seg_tree[j*2+1].min);
-                seg_tree[j].max = max(seg_tree[j*2].max,seg_tree[j*2+1].max);
+                int a,b;
+                a = seg_tree[j].min = min(seg_tree[j*2].min,seg_tree[j*2+1].min);
+                b = seg_tree[j].max = max(seg_tree[j*2].max,seg_tree[j*2+1].max);
+                printf("j: %d- a: %d, b: %d\n",j,a,b);
             }
         }
         if(L==0) L++;
