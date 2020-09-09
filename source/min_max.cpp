@@ -11,7 +11,7 @@ https://www.acmicpc.net/problem/2357
 #include <cmath>
 #include <vector>
 
-#define MAX_VAL = 1'000'000'000
+#define MAX_VAL 1'000'000'000
 
 using namespace std;
 
@@ -26,19 +26,54 @@ struct Node{
 
 class SegmentTree{
     private:
-        Node node_arr*;
+        vector<Node> tree;
+        vector<int> idx;
         int height;
+        int size;
     public:
         SegmentTree(vector<lli>& vec);
-        ~SegmentTree(){delete [] node_arr;}
-    
+        void init(vector<lli>& vec, int node, int start, int end);
+        int getSize() {return tree.size();}
+        Node getInverval(int S,int E); 
+        void printTree();
 };
 
 SegmentTree::SegmentTree(vector<lli>& vec){
-    height = (int)log2(vec.size());
-    node_arr = new Node[pow(2,height+1)];
+    size = vec.size()-1;
+    idx.resize(size+1);
+    height = (int)log2(size)+1;
+    tree.resize(pow(2,(height+1)));
+    init(vec,1,1,size);
+}
+
+void SegmentTree::init(vector<lli>& vec, int node, int start, int end){
+    if(start==end){
+        idx[start] = node;
+        return tree[node].setLeaf(vec[start]);
+    }
+
+    int mid = (start + end)/2;
+    init(vec,node*2,start,mid);
+    init(vec,node*2+1,mid+1,end);
+}
+
+Node SegmentTree::getInverval(int S,int E,int node=1){
+    
 
 
+    
+    return Node(max_v,min_v);
+}
+
+void SegmentTree::printTree(){
+    int p=1;
+    for(int i=1;i<tree.size();i++){
+        if(i==(int)pow(2,p)){
+            cout << endl;
+            p++;
+        }
+        printf("(%lld,%lld) ",tree[i].max,tree[i].min);
+    }
 
 }
 
@@ -48,60 +83,22 @@ int main(){
     int N,M;
     cin >> N >> M;
 
-    vector<lli> numset(N);
+    vector<lli> numset;
+    numset.resize(N+1);
 
-    for(int i=0;i<N;i++)
+    for(int i=1;i<=N;i++)
         scanf("%lld",&numset[i]);
     
     SegmentTree segTree(numset); //set leaf.
-
-
+    
     for(int i=0;i<M;i++){
         int S,E;
         scanf("%d %d",&S,&E);
-        S = N+S-1;
-        E = N+E-1;
-
-        lli min_v = min(seg_tree[S].min,seg_tree[E].min);
-        lli max_v = max(seg_tree[S].max,seg_tree[E].max);
+        Node Ans = segTree.getInverval(S,E);
         
-        int L = S;// + S%2;
-        int R = E;// - (E+1)%2;
-        
-        while( L < R && L*R >0){
-            printf("L: %d, R: %d\n",L,R);
-            if(L%2==1){
-                min_v = min(min_v,seg_tree[L].min);
-                max_v = max(max_v,seg_tree[L].max);
-                L = L+1;
-            }
-            if(R%2==0){
-                min_v = min(min_v,seg_tree[R].min);
-                max_v = max(max_v,seg_tree[R].max);
-                R = R-1;
-            }
-
-            L = L/2;
-            R = R/2;
-            printf("L: %d, R: %d\n",L,R);
-            for(int j=L;j<=R;j++){
-                int a,b;
-                a = seg_tree[j].min = min(seg_tree[j*2].min,seg_tree[j*2+1].min);
-                b = seg_tree[j].max = max(seg_tree[j*2].max,seg_tree[j*2+1].max);
-                printf("j: %d- a: %d, b: %d\n",j,a,b);
-            }
-            
-        }
-        // if(L==0) L++;
-        
-        
-        min_v = min(min_v,seg_tree[L].min);
-        max_v = max(max_v,seg_tree[L].max);
-
-
-
-        printf("L: %d, R: %d\n",L,R);
-        cout << min_v << " " << max_v << endl;
+        // segTree.printTree();
+    
+        cout << Ans.min << " " << Ans.max << endl;
     }
 
 
