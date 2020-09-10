@@ -57,10 +57,14 @@ void SegmentTree::init(vector<lli>& vec, int node, int start, int end){
     init(vec,node*2+1,mid+1,end);
 }
 
-Node SegmentTree::getInverval(int S,int E,int node=1){
+Node SegmentTree::getInverval(int node, int S, int E, int L, int R){
     
 
-
+    if(L>E || R<S || L<S || R>E)
+        return Node();
+    if(L==S || R==E)
+        return tree[idx]
+        
     
     return Node(max_v,min_v);
 }
@@ -94,7 +98,7 @@ int main(){
     for(int i=0;i<M;i++){
         int S,E;
         scanf("%d %d",&S,&E);
-        Node Ans = segTree.getInverval(S,E);
+        Node Ans = segTree.getInverval(1,S,E,S,E);
         
         // segTree.printTree();
     
