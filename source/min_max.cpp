@@ -32,9 +32,9 @@ class SegmentTree{
         int size;
     public:
         SegmentTree(vector<lli>& vec);
-        void init(vector<lli>& vec, int node, int start, int end);
+        Node init(vector<lli>& vec, int node, int start, int end);
         int getSize() {return tree.size();}
-        Node getInverval(int S,int E); 
+        Node getInverval(int node, int S, int E, int L, int R);
         void printTree();
 };
 
@@ -46,27 +46,39 @@ SegmentTree::SegmentTree(vector<lli>& vec){
     init(vec,1,1,size);
 }
 
-void SegmentTree::init(vector<lli>& vec, int node, int start, int end){
+Node SegmentTree::init(vector<lli>& vec, int node, int start, int end){
     if(start==end){
         idx[start] = node;
-        return tree[node].setLeaf(vec[start]);
+        tree[node].setLeaf(vec[start]);
     }
+    else{
+        int mid = (start + end)/2;
+        Node left = init(vec,node*2,start,mid);
+        Node right = init(vec,node*2+1,mid+1,end);
 
-    int mid = (start + end)/2;
-    init(vec,node*2,start,mid);
-    init(vec,node*2+1,mid+1,end);
+        tree[node].max = max(left.max,right.max);
+        tree[node].min = min(left.min,right.min);
+    }
+    if(node==1) printf("(%lld,%lld) ",tree[1].min,tree[1].max);
+    return tree[node];
+
 }
 
 Node SegmentTree::getInverval(int node, int S, int E, int L, int R){
-    
-
-    if(L>E || R<S || L<S || R>E)
+    printf("node: %d, S: %d, E: %d\n",node,S,E);
+    if(L<S || R>E)
         return Node();
-    if(L==S || R==E)
-        return tree[idx]
-        
     
-    return Node(max_v,min_v);
+    if(S==E)
+        return tree[node];
+
+    int mid = (S+E)/2;
+
+    Node left = getInverval(node*2,S,mid,L,R);
+    Node right = getInverval(node*2+1,mid+1,E,L,R);
+    tree[node].max = max(left.max,right.max);
+    tree[node].min = min(left.min,right.min);
+    return tree[node];
 }
 
 void SegmentTree::printTree(){
@@ -76,7 +88,7 @@ void SegmentTree::printTree(){
             cout << endl;
             p++;
         }
-        printf("(%lld,%lld) ",tree[i].max,tree[i].min);
+        printf("(%lld,%lld) ",tree[i].min,tree[i].max);
     }
 
 }
@@ -100,7 +112,7 @@ int main(){
         scanf("%d %d",&S,&E);
         Node Ans = segTree.getInverval(1,S,E,S,E);
         
-        // segTree.printTree();
+        segTree.printTree();
     
         cout << Ans.min << " " << Ans.max << endl;
     }
