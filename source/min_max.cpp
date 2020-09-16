@@ -11,6 +11,7 @@ https://www.acmicpc.net/problem/2357
 #include <cmath>
 #include <vector>
 #include <utility>
+#include <unordered_map>
 
 #define MAX_VAL 1'000'000'000
 
@@ -22,9 +23,10 @@ typedef pair<lli,lli> Node;
 
 class SegmentTree{
     private:
-        Node* tree;
-        int height;
+        Node tree[(int)pow(2,16)];
+        unordered_map<pair<int,int>,Node> dp;
         int size;
+
     public:
         SegmentTree(vector<lli>& vec);
         Node init(vector<lli>& vec, int node, int start, int end);
@@ -35,8 +37,6 @@ class SegmentTree{
 
 SegmentTree::SegmentTree(vector<lli>& vec){
     size = vec.size()-1;
-    height = (int)log2(size)+1;
-    tree = new Node[(int)pow(2,(height+1))];
     init(vec,1,1,size);
 }
 
@@ -62,13 +62,17 @@ Node SegmentTree::getInverval(int node, int S, int E, int L, int R){
     else if(R<S || L>E)
         return make_pair(0,MAX_VAL);
 
+    if(dp.find(make_pair(S,E))!=dp.end())
+        return dp[make_pair(S,E)];
+
     int mid = (S+E)/2;
     Node left = getInverval(node*2,S,mid,L,R);
     Node right = getInverval(node*2+1,mid+1,E,L,R);
     Node res;
     res.first = max(left.first,right.first);
     res.second = min(left.second,right.second);
-    return res;
+
+    return dp[make_pair(S,E)]=res;
 }
 
 void SegmentTree::printTree(){
