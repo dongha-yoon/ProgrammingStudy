@@ -31,15 +31,18 @@ Root tree_init(){
     return root;
 }
 
-void tree_insert(Root r,int index,key k){
+void tree_insert(Root r,int index,key k_input){
     int buf=0;
-    Node **ptr = NULL;
+    Node *ptr = r.rnode;
 
-    for(int i=0;i<r.rnode->path;i++){
-        if(input[buf]==r.rnode->key){
+    while(1){
+        if(k_input[buf]==r.rnode->key){
             buf++;
-            ptr = r.rnode->child;
         }
+        if(!buf){
+
+        }
+
 
     }
 }
@@ -58,29 +61,3 @@ int main(){
 
 
 }
-               +-----------+
-               |           |
-               |    " "    |
-               |           |
-        +------+-----------+------+
-        |                         |
-        |                         |
-   +----v------+            +-----v-----+
-   |           |            |           |
-   |    g      |            |     c     |
-   |           |            |           |
-   +-----------+            +-----------+
-        |                         |
-        |                         |
-   +----v------+            +-----v-----+
-   |           |            |           |
-   |    o      |            |     a     |
-   |           |            |           |
-   +-----------+            +-----------+
-                                  |
-                                  |
-                            +-----v-----+
-                            |           |
-                            |     t     |
-                            |           |
-                            +-----------+
