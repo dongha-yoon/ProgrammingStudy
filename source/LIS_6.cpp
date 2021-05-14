@@ -24,22 +24,30 @@ int main(){
     int N;
     cin >> N;
 
-    for(int i=1;i<=N;i++){
+    for(int i=0;i<N;i++){
         scanf("%d",&seq[i]);
     }
-        
-    for(int i=1;i<=N;i++){
-        for(int j=1;j<i;j++){
-            if(seq[i] > seq[j] && dp[i] < dp[j])    dp[i] = dp[j];
-        }
-        dp[i]++;
-    }
 
-    int ans = 0;
-    for(int i=1;i<=N;i++){
-        if( dp[i] > ans) ans = dp[i];
-        if(map.find(dp[i])!=map.end())  map[dp[i]]++;
-        else map[dp[i]]=0;
+    dp[0] = 0;
+    int length = 0;
+    for(int i=0;i<N;i++){
+        if(dp[length] < seq[i])
+            dp[++length] = seq[i];
+        else{
+            int s = 0;
+            int e = i;
+            while(s<e){
+                int m = (s+e)/2;
+                if(dp[m] >= seq[i])
+                    e = m;
+                else
+                    s = m+1;
+            }
+            dp[e] = seq[i];
+        }
     }
-    cout << ans << " " << map[ans] << endl;
+    for(int i=0;i<N;i++)
+        cout << dp[i] << " ";
+    cout << endl;
+    cout << length << endl;
 }
