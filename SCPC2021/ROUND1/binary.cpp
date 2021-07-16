@@ -16,7 +16,7 @@ using namespace std;
 
 int Answer;
 
-#define MAX 50000
+#define MAX 50001
 
 char B[MAX];
 char ans[MAX];
@@ -49,47 +49,42 @@ int main(int argc, char** argv)
         scanf("%s",B);
         
         memcpy(ans,ZERO,n);
-        memcpy(ans+t,B,t);
-        memcpy(ans+n-t-t,B+n-t,t);
-        
-        printf("%s\n",ans);
+        int cp_size = min(t,n-t);
+        memcpy(ans+t,B,cp_size);
+        memcpy(ans+n-t-t,B+n-t,cp_size);
 
         for(int i=t; i<n-t;i++){
-            if(B[i] == '0'){
-                
+            if(B[i] == '0')
                 ans[i+t] = ans[i-t] = '0';
-            }
                 
-
-            if(ans[i]=='x'){
+            if(ans[i]=='x')
                 if(B[i-t]== B[i+t])
                     ans[i] = B[i-t];
-            }
-            
+
         }
-        printf("%s\n",ans);
-
-
-        for(int i=n-t; i<n;i++){
-            
-            if(ans[i]=='x' && ans[i-2*t] != B[i-t]){
-                ans[i] = B[i-t];
-            }
+        for(int i=n-t; i<n;i++){        
+            if(ans[i]=='x'){
+                if(i-2*t >=0 && ans[i-2*t] != B[i-t])
+                    ans[i] = B[i-t];
+                else
+                    ans[i] = '0';
+            }        
+        }
+        for(int i=0; i<t;i++){
+            if(ans[i]=='x'){
+                if(i+2*t < n && ans[i+2*t] != B[i+t])
+                    ans[i] = B[i+t];
+                else
+                    ans[i] = '0';
+            }        
         }
 
 
         
 		// Print the answer to standard output(screen).
 		cout << "Case #" << test_case+1 << endl;
-		printf("%s\n",ans);
+		cout << ans << endl;
 	}
 
 	return 0;//Your program should return 0 on normal termination.
 }
-
-
-// S: 1111111000
-
-    //   xx11x10010
-// L: 1111100000
-// R: 0011111110
